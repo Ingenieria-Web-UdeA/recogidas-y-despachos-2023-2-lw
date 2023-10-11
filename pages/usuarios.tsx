@@ -1,10 +1,17 @@
+import { Tooltip } from '@/components/ui/Tooltip';
+import { NewUserDialog } from '@/components/usuarios/NewUserDialog';
 import { UsersTableActions } from '@/components/usuarios/UsersTableActions';
+import { useGetRoles } from '@/hooks/useGetRoles';
 import { API_SERVICES, fetcher } from '@/service';
 import { UsersQuery } from '@/types';
 import Image from 'next/image';
+import { useState } from 'react';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 import useSWR from 'swr';
 
 const UsersPage = () => {
+  const [openNewUserDialog, setOpenNewUserDialog] = useState(false);
+  const { roles } = useGetRoles();
   const { data, isLoading, error } = useSWR<UsersQuery>(
     API_SERVICES.users,
     fetcher
@@ -17,7 +24,18 @@ const UsersPage = () => {
   return (
     <div className='w-full flex flex-col items-center p-10 gap-4'>
       <section>
-        <h1>Gestión de usuarios</h1>
+        <div className='flex items-center gap-3'>
+          <h1>Gestión de usuarios</h1>
+          <Tooltip message='Crear nuevo usuario'>
+            <button
+              type='button'
+              onClick={() => setOpenNewUserDialog(true)}
+              className='flex text-2xl mt-2 text-indigo-700 hover:scale-110'
+            >
+              <AiOutlinePlusCircle />
+            </button>
+          </Tooltip>
+        </div>
       </section>
       <section>
         <table cellSpacing='0'>
@@ -26,6 +44,7 @@ const UsersPage = () => {
               <th>Imagen</th>
               <th>Nombre</th>
               <th>Correo electrónico</th>
+              <th>Rol</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -45,6 +64,9 @@ const UsersPage = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
+                    {roles?.find((r) => r.id === user.roleId)?.name ?? ''}
+                  </td>
+                  <td>
                     <UsersTableActions user={user} />
                   </td>
                 </tr>
@@ -53,6 +75,7 @@ const UsersPage = () => {
           </tbody>
         </table>
       </section>
+      <NewUserDialog open={openNewUserDialog} setOpen={setOpenNewUserDialog} />
     </div>
   );
 };

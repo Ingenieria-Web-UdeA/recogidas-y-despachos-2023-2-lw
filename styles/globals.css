@@ -41,3 +41,12 @@ button.primary {
 button.secondary {
   @apply px-4 py-2 text-white rounded-lg shadow-md bg-gray-500  hover:bg-gray-700 disabled:bg-gray-300;
 }
+
+label {
+  @apply flex flex-col;
+}
+
+input,
+select {
+  @apply px-2 py-1 border border-indigo-300 rounded-lg focus:outline-indigo-700;
+}

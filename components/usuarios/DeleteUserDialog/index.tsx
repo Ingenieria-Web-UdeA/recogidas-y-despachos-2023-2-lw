@@ -2,10 +2,11 @@ import { Dialog } from '@/components/ui/Dialog';
 import { Dispatch, SetStateAction, useState } from 'react';
 import axios from 'axios';
 import { API_SERVICES } from '@/service';
-import { Spinner } from '@/components/ui/Spinner';
 import { toast } from 'react-toastify';
 import { mutate } from 'swr';
 import { User } from '@/types';
+import { PrimaryActionButton } from '@/components/ui/Buttons/PrimaryActionButton';
+import { SecondaryActionButton } from '@/components/ui/Buttons';
 
 interface DeleteUserDialogProps {
   open: boolean;
@@ -46,24 +47,18 @@ const DeleteUserDialog = ({ open, setOpen, user }: DeleteUserDialogProps) => {
           <span>¿Está seguro de querer eliminar el usuario?</span>
         </div>
         <div className='flex gap-3'>
-          <button
-            disabled={loading}
-            type='button'
+          <PrimaryActionButton
+            loading={loading}
             onClick={deleteUser}
-            className='primary'
-          >
-            {loading ? <Spinner /> : <span>Continuar</span>}
-          </button>
-          <button
-            disabled={loading}
+            text='Confirmar'
             type='button'
-            onClick={() => {
-              setOpen(false);
-            }}
-            className='secondary'
-          >
-            Cancelar
-          </button>
+          />
+          <SecondaryActionButton
+            text='Cancelar'
+            type='button'
+            loading={loading}
+            onClick={() => setOpen(false)}
+          />
         </div>
       </div>
     </Dialog>

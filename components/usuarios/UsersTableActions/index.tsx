@@ -3,6 +3,7 @@ import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
 import { DeleteUserDialog } from '@/components/usuarios/DeleteUserDialog';
 import { useState } from 'react';
 import { User } from '@/types';
+import { UpdateUserDialog } from '@/components/usuarios/UpdateUserDialog';
 
 interface UsersTableActionsProps {
   user: User;
@@ -10,10 +11,15 @@ interface UsersTableActionsProps {
 
 const UsersTableActions = ({ user }: UsersTableActionsProps) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   return (
     <div className='text-2xl flex gap-3'>
       <Tooltip message='Actualizar el usuario'>
-        <button type='button' className='hover:text-yellow-700'>
+        <button
+          onClick={() => setOpenUpdateDialog(true)}
+          type='button'
+          className='hover:text-yellow-700'
+        >
           <MdOutlineModeEditOutline />
         </button>
       </Tooltip>
@@ -32,6 +38,11 @@ const UsersTableActions = ({ user }: UsersTableActionsProps) => {
         user={user}
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
+      />
+      <UpdateUserDialog
+        user={user}
+        open={openUpdateDialog}
+        setOpen={setOpenUpdateDialog}
       />
     </div>
   );
