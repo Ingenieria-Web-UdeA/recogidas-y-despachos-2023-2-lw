@@ -1,4 +1,4 @@
-import { NavigationCard } from '@/components/NavigationCard';
+import { NavigationCard } from '@/components/ui/NavigationCard';
 
 const Home = () => {
   return (
