@@ -35,13 +35,9 @@ const UpdateUserDialog = ({ open, setOpen, user }: UpdateUserDialogProps) => {
       await axios.request({
         method: 'PUT',
         url: `${API_SERVICES.users}/${user?.id ?? ''}`,
-        data: { data: formData.name, column: 'name' },
+        data: { name: formData.name, roleId: formData.roleId },
       });
-      await axios.request({
-        method: 'PUT',
-        url: `${API_SERVICES.users}/${user?.id ?? ''}`,
-        data: { data: formData.roleId, column: 'roleId' },
-      });
+
       // actualizacion de la tabla de usuarios
       await mutate(API_SERVICES.users);
       toast.success('Usuario actualizado correctamente');
