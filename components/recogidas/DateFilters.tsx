@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useDateFilters } from '@/atoms/DateFiltersAtom';
 
 const years = [2021, 2022, 2023];
 
@@ -54,11 +54,7 @@ const months = [
 ];
 
 const DateFilters = () => {
-  const [dateFilters, setDateFilters] = useState({
-    year: new Date().getFullYear(),
-    month: new Date().getMonth(),
-  });
-
+  const { dateFilters, setDateFilters } = useDateFilters();
   return (
     <div className='flex gap-3'>
       <label htmlFor='year'>
