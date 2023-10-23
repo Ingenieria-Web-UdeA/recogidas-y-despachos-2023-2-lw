@@ -1,4 +1,4 @@
-import { Collection, Lot, Role, User } from '@prisma/client';
+import { Collection, Lot, Role, Shipment, User } from '@prisma/client';
 
 export interface UsersQuery {
   users: User[];
@@ -14,4 +14,8 @@ export interface LotsQuery {
 
 export interface CollectionsQuery {
   collections: Collection[];
+}
+
+export interface ShipmentsQuery {
+  shipments: Shipment[];
 }

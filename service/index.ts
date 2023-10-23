@@ -5,6 +5,7 @@ const API_SERVICES = {
   roles: `${API_URL}/roles`,
   lots: `${API_URL}/lots`,
   collections: `${API_URL}/collections`,
+  shipments: `${API_URL}/shipments`,
 };
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
