@@ -5,7 +5,7 @@ import {
 import { Dialog } from '@/components/ui/Dialog';
 import { useGetRoles } from '@/hooks/useGetRoles';
 import { API_SERVICES } from '@/service';
-import { User } from '@/types';
+import { User } from '@prisma/client';
 import { Dispatch, SetStateAction, useState, SyntheticEvent } from 'react';
 import { toast } from 'react-toastify';
 import { mutate } from 'swr';
@@ -59,7 +59,7 @@ const UpdateUserDialog = ({ open, setOpen, user }: UpdateUserDialogProps) => {
         <label htmlFor='user-name'>
           <span>Nombre</span>
           <input
-            value={formData.name}
+            value={formData?.name ?? ''}
             onChange={(e) =>
               setFormData({
                 ...formData,
@@ -75,7 +75,7 @@ const UpdateUserDialog = ({ open, setOpen, user }: UpdateUserDialogProps) => {
           <span>Rol</span>
           <select
             required
-            value={formData.roleId}
+            value={formData?.roleId ?? ''}
             onChange={(e) =>
               setFormData({
                 ...formData,

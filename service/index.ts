@@ -4,6 +4,7 @@ const API_SERVICES = {
   users: `${API_URL}/users`,
   roles: `${API_URL}/roles`,
   lots: `${API_URL}/lots`,
+  collections: `${API_URL}/collections`,
 };
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());

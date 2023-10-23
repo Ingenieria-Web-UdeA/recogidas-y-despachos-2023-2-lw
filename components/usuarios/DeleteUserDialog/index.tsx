@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_SERVICES } from '@/service';
 import { toast } from 'react-toastify';
 import { mutate } from 'swr';
-import { User } from '@/types';
+import { User } from '@prisma/client';
 import { PrimaryActionButton } from '@/components/ui/Buttons/PrimaryActionButton';
 import { SecondaryActionButton } from '@/components/ui/Buttons';
 
