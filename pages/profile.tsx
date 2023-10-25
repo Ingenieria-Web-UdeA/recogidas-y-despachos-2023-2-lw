@@ -1,8 +1,12 @@
+import { PrivateRoute } from '@/components/PrivateRoute';
+
 const ProfilePage = () => {
   return (
-    <div>
-      <h1>Profile</h1>
-    </div>
+    <PrivateRoute>
+      <div>
+        <h1>Profile</h1>
+      </div>
+    </PrivateRoute>
   );
 };
 
