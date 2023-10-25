@@ -5,6 +5,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
     const { year, month } = req.query;
 
+    const nextMonth = month === '12' ? 1 : parseInt(month as string) + 1;
+
+    const newYear = month === '12' ? parseInt(year as string) + 1 : year;
+
     const shipments = await prisma.shipment.findMany({
       where: {
         AND: [
@@ -15,14 +19,33 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           },
           {
             shipmentDate: {
-              lt: new Date(`${year}-${parseInt(month as string) + 1}-01`),
+              lt: new Date(`${newYear}-${nextMonth}-01`),
             },
           },
         ],
       },
+      orderBy: {
+        shipmentDate: 'asc',
+      },
     });
 
     return res.status(200).json({ shipments });
+  }
+
+  if (req.method === 'POST') {
+    const { shipmentDate, shippedBunches, deliveredWeight } = req.body;
+
+    const newShipment = await prisma.shipment.create({
+      data: {
+        shipmentDate: new Date(shipmentDate),
+        shippedBunches: parseInt(shippedBunches),
+        deliveredWeight: parseInt(deliveredWeight),
+        bunchWeight: parseInt(deliveredWeight) / parseInt(shippedBunches),
+        userId: 'clo49s9ff00007eu0mk4lmuql',
+      },
+    });
+
+    return res.status(200).json({ newShipment });
   }
 
   return res.status(405).json({ message: 'Method not allowed' });
