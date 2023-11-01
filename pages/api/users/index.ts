@@ -1,7 +1,7 @@
 import { prisma } from '@/service/prisma';
 import { User } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
-
+import { checkProtectedApi } from '@/utils/checkServerSession';
 
 interface Response {
   users?: User[];
@@ -10,6 +10,8 @@ interface Response {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Response>) => {
+  await checkProtectedApi(req, res, 'ADMIN');
+
   if (req.method === 'GET') {
     const users = await prisma.user.findMany();
     return res.status(200).json({ users });

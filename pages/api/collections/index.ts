@@ -1,5 +1,5 @@
 import { prisma } from '@/service/prisma';
-// import { Collection } from '@prisma/client';
+import { checkPrivateApi } from '@/utils/checkServerSession';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 interface Response {
@@ -8,6 +8,8 @@ interface Response {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Response>) => {
+  await checkPrivateApi(req, res);
+
   if (req.method === 'GET') {
     const { year, month } = req.query;
 

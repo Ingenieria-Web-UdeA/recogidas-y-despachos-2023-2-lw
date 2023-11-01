@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { User } from '@prisma/client';
 import { prisma } from '@/service/prisma';
+import { checkProtectedApi } from '@/utils/checkServerSession';
 
 interface Response {
   user?: User;
@@ -8,6 +9,8 @@ interface Response {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Response>) => {
+  await checkProtectedApi(req, res, 'ADMIN');
+
   if (req.method === 'PUT') {
     const idUsuario = req.query.id as string;
     const { name, roleId } = req.body;

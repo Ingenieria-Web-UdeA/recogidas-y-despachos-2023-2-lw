@@ -1,4 +1,5 @@
 import { prisma } from '@/service/prisma';
+import { checkPrivateApi } from '@/utils/checkServerSession';
 import { Collection } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -8,6 +9,8 @@ interface Response {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Response>) => {
+  await checkPrivateApi(req, res);
+
   if (req.method === 'PUT') {
     const id = req.query.id as string;
 

@@ -5,10 +5,20 @@ import { NewShipmentDialog } from '@/components/despachos/NewShipmentDialog';
 import { DateFilters } from '@/components/recogidas/DateFilters';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { useGetShipments } from '@/hooks/useGetShipments';
+import { useGetUsers } from '@/hooks/useGetUsers';
 import { useState } from 'react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
+const ShipmentsPageWrapper = () => {
+  return (
+    <PrivateRoute>
+      <ShipmentsPage />
+    </PrivateRoute>
+  );
+};
+
 const ShipmentsPage = () => {
+  const { users } = useGetUsers();
   const [openNewShipmentDialog, setOpenNewShipmentDialog] = useState(false);
   const { shipments, isLoading } = useGetShipments();
 
@@ -56,6 +66,9 @@ const ShipmentsPage = () => {
                   <th>Racimos despachados</th>
                   <th>Peso por racimo</th>
                   <th>Kilos entregados en planta</th>
+                  <PrivateComponent roleName='ADMIN'>
+                    <th>Responsable</th>
+                  </PrivateComponent>
                 </tr>
               </thead>
               <tbody>
@@ -73,6 +86,14 @@ const ShipmentsPage = () => {
                       <td>{shipment.shippedBunches}</td>
                       <td>{shipment.bunchWeight.toFixed(2)}</td>
                       <td>{shipment.deliveredWeight}</td>
+                      <PrivateComponent roleName='ADMIN'>
+                        <td>
+                          {
+                            users?.find((usr) => usr.id === shipment.userId)
+                              ?.name
+                          }
+                        </td>
+                      </PrivateComponent>
                     </tr>
                   );
                 })}
@@ -105,4 +126,4 @@ const ShipmentsPage = () => {
   );
 };
 
-export default ShipmentsPage;
+export default ShipmentsPageWrapper;
