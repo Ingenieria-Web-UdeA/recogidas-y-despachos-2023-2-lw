@@ -1,3 +1,4 @@
+import { PrivateComponent } from '@/components/PrivateComponent';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -86,7 +87,9 @@ const Navbar = () => {
                   : 'invisible opacity-0'
               }`}
             >
-              <NavbarLink href='/usuarios' title='Usuarios' />
+              <PrivateComponent roleName='ADMIN'>
+                <NavbarLink href='/usuarios' title='Usuarios' />
+              </PrivateComponent>
               <NavbarLink href='/lotes' title='Lotes' />
               <NavbarLink href='/recogidas' title='Recogidas' />
               <NavbarLink href='/despachos' title='Despachos' />

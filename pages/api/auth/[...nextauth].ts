@@ -4,6 +4,20 @@ import NextAuth, { NextAuthOptions } from 'next-auth';
 import Auth0Provider from 'next-auth/providers/auth0';
 
 export const authOptions: NextAuthOptions = {
+  callbacks: {
+    async session({ session, user }) {
+      const usr = await prisma.user.findUnique({
+        where: {
+          email: user.email,
+        },
+        include: {
+          role: true,
+        },
+      });
+
+      return { ...session, user: { ...session.user, role: usr?.role?.name } };
+    },
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     Auth0Provider({

@@ -1,3 +1,4 @@
+import { PrivateComponent } from '@/components/PrivateComponent';
 import { PrivateRoute } from '@/components/PrivateRoute';
 import { IndicatorCard } from '@/components/despachos/IndicatorCard';
 import { NewShipmentDialog } from '@/components/despachos/NewShipmentDialog';
@@ -77,20 +78,22 @@ const ShipmentsPage = () => {
                 })}
               </tbody>
             </table>
-            <div className='flex flex-col gap-4'>
-              <IndicatorCard
-                title='Total de racimos recogidos'
-                value={totalBunches ?? 0}
-              />
-              <IndicatorCard
-                title='Peso promedio por racimo'
-                value={`${averageBunchWeight.toFixed(2)} kg`}
-              />
-              <IndicatorCard
-                title='Total de kilos entregados'
-                value={totalWeight ?? 0}
-              />
-            </div>
+            <PrivateComponent roleName='ADMIN'>
+              <div className='flex flex-col gap-4'>
+                <IndicatorCard
+                  title='Total de racimos recogidos'
+                  value={totalBunches ?? 0}
+                />
+                <IndicatorCard
+                  title='Peso promedio por racimo'
+                  value={`${averageBunchWeight.toFixed(2)} kg`}
+                />
+                <IndicatorCard
+                  title='Total de kilos entregados'
+                  value={totalWeight ?? 0}
+                />
+              </div>
+            </PrivateComponent>
           </div>
         </section>
         <NewShipmentDialog

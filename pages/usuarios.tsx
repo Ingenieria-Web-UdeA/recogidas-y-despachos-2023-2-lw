@@ -1,4 +1,4 @@
-import { PrivateRoute } from '@/components/PrivateRoute';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { NewUserDialog } from '@/components/usuarios/NewUserDialog';
 import { UsersTableActions } from '@/components/usuarios/UsersTableActions';
@@ -23,7 +23,7 @@ const UsersPage = () => {
   if (error) return <div>Ha ocurrido un error</div>;
 
   return (
-    <PrivateRoute>
+    <ProtectedRoute roleName='ADMIN'>
       <div className='w-full flex flex-col items-center p-10 gap-4'>
         <section>
           <div className='flex items-center gap-3'>
@@ -82,7 +82,7 @@ const UsersPage = () => {
           setOpen={setOpenNewUserDialog}
         />
       </div>
-    </PrivateRoute>
+    </ProtectedRoute>
   );
 };
 
