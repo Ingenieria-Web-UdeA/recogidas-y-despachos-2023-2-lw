@@ -19,3 +19,14 @@ export interface CollectionsQuery {
 export interface ShipmentsQuery {
   shipments: Shipment[];
 }
+
+export interface CollectionsIndicator {
+  year: number;
+  month: number;
+  lote: string;
+  total: number;
+}
+
+export interface IndicatorsQuery {
+  indicadores: CollectionsIndicator[];
+}

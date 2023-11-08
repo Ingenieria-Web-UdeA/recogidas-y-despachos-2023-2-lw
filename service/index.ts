@@ -6,6 +6,7 @@ const API_SERVICES = {
   lots: `${API_URL}/lots`,
   collections: `${API_URL}/collections`,
   shipments: `${API_URL}/shipments`,
+  indicators: `${API_URL}/collections/indicators`,
 };
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());

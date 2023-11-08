@@ -93,6 +93,9 @@ const Navbar = () => {
               <NavbarLink href='/lotes' title='Lotes' />
               <NavbarLink href='/recogidas' title='Recogidas' />
               <NavbarLink href='/despachos' title='Despachos' />
+              <PrivateComponent roleName='ADMIN'>
+                <NavbarLink href='/indicadores' title='Indicadores' />
+              </PrivateComponent>
             </ul>
             <div className='ml-auto flex items-center px-6 lg:ml-0 lg:p-0'>
               {/*        <!-- Avatar --> */}

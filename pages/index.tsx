@@ -33,6 +33,13 @@ const Home = () => {
             description='Crear, actualizar o eliminar despachos'
             href='/despachos'
           />
+          <PrivateComponent roleName='ADMIN'>
+            <NavigationCard
+              title='Indicadores'
+              description='Visualizar indicadores de recogidas'
+              href='/indicadores'
+            />
+          </PrivateComponent>
         </div>
       ) : (
         <div>
