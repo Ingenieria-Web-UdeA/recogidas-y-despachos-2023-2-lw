@@ -1,4 +1,5 @@
 import { PrivateComponent } from '@/components/PrivateComponent';
+import { useGetUserProfile } from '@/hooks/useGetUserProfile';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,6 +7,8 @@ import React, { useState } from 'react';
 
 const Navbar = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+
+  const { profile } = useGetUserProfile();
 
   return (
     <>
@@ -104,7 +107,7 @@ const Navbar = () => {
                 className='relative inline-flex h-10 w-10 items-center justify-center rounded-full text-white'
               >
                 <Image
-                  src='https://s.gravatar.com/avatar/f04bb6129f53bef63dd289da7868259b?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fds.png'
+                  src={profile?.profile.image ?? '/media/default-user.jpg'}
                   alt='user name'
                   title='user name'
                   width='40'

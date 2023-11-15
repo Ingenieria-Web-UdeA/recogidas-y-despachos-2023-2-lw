@@ -30,3 +30,15 @@ export interface CollectionsIndicator {
 export interface IndicatorsQuery {
   indicadores: CollectionsIndicator[];
 }
+
+export interface ProfileQuery {
+  userProfile: {
+    email: string;
+    image: string;
+    profile: {
+      document: string;
+      phoneNumber: string;
+      image: string;
+    };
+  };
+}
